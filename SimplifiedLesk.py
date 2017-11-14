@@ -10,7 +10,7 @@ class SimplifiedLesk:
     def __init__(self):
         self.stopwords = set(stopwords.words('english'))
 
-    def simplified_lesk(self, word, sentence):
+    def disambiguate(self, word, sentence):
         """Return the best sense from wordnet for the word in given sentence.
 
         Args:
@@ -19,7 +19,7 @@ class SimplifiedLesk:
 
         """
         word_senses = wordnet.synsets(word)
-        best_sense = word_senses[0]  # Assuming that the first sense is the most freq.
+        best_sense = word_senses[0]  # Assume that first sense is most freq.
         max_overlap = 0
         context = set(word_tokenize(sentence))
         for sense in word_senses:
@@ -55,4 +55,4 @@ word = "bank"
 lesk = SimplifiedLesk()
 print ("Word :", word)
 print ("Sentence :", sentence)
-print ("Best sense: ", lesk.simplified_lesk(word, sentence))
+print ("Best sense: ", lesk.disambiguate(word, sentence))
